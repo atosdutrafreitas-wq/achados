@@ -9,16 +9,16 @@
 <meta property="og:url" content="https://atosdutrafreitas-wq.github.io/achados/anuncie.html">
 <style>
   :root{
-    --paper:#181A16;
-    --paper-raised:#22241E;
-    --ink:#EDEFE4;
-    --ink-soft:#B7BBA9;
-    --rule:#3a3d33;
-    --tag-red:#E15963;
-    --tag-red-ink:#1a0d0e;
-    --gold:#D9A441;
-    --savings:#6FAE82;
-    --focus:#7AA2FF;
+    --paper:#0B0E13;
+    --paper-raised:#12161E;
+    --ink:#E9EEF3;
+    --ink-soft:#8D98A8;
+    --rule:#232B36;
+    --tag-red:#FF2E7A;
+    --tag-red-ink:#1A0410;
+    --gold:#22E6C8;
+    --savings:#39FF88;
+    --focus:#5B8CFF;
   }
 
   *{box-sizing:border-box;}
@@ -94,8 +94,24 @@
     display:flex; flex-direction:column; gap:14px;
     font-size:0.78rem; color:var(--ink-soft);
   }
-  footer .site-nav{ display:flex; flex-wrap:wrap; gap:16px; }
+  footer .site-nav{ display:flex; flex-wrap:wrap; align-items:center; gap:16px; }
   footer .site-nav a{ text-decoration:none; border-bottom:1px solid var(--rule); }
+  footer .site-nav a.cta-pill{
+    display:inline-flex; align-items:center;
+    border:1.5px solid var(--tag-red); color:var(--tag-red);
+    padding:5px 14px; border-radius:999px;
+    text-transform:uppercase; letter-spacing:0.05em; font-size:0.72rem;
+    font-family:'Bahnschrift',sans-serif;
+    transition:transform 180ms ease, box-shadow 180ms ease, background 180ms ease, color 180ms ease;
+  }
+  footer .site-nav a.cta-pill:hover, footer .site-nav a.cta-pill:focus-visible{
+    background:var(--tag-red); color:var(--tag-red-ink);
+    box-shadow:0 0 16px rgba(34,230,200,0.5);
+    transform:translateY(-2px);
+  }
+  @media (prefers-reduced-motion:reduce){
+    footer .site-nav a.cta-pill:hover, footer .site-nav a.cta-pill:focus-visible{ transform:none; }
+  }
   footer .bottom-row{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; }
   .disclosure{ max-width:640px; }
 </style>
@@ -128,7 +144,7 @@
       <a href="sobre.html">Sobre</a>
       <a href="contato.html">Contato</a>
       <a href="politica-afiliados.html">Política de Afiliados</a>
-      <a href="anuncie.html">Anuncie Aqui</a>
+      <a href="anuncie.html" class="cta-pill">Anuncie Aqui</a>
     </nav>
     <div class="bottom-row">
       <div class="disclosure">
