@@ -17,7 +17,9 @@
     --tag-red-ink:#1A0410;
     --gold:#22E6C8;
     --savings:#39FF88;
+    --amber:#FFB020;
     --focus:#5B8CFF;
+    --font-mono:'Cascadia Code','Consolas','SFMono-Regular',Menlo,monospace;
   }
   *{box-sizing:border-box;}
   body{
@@ -28,9 +30,26 @@
   .display{ font-family:'Bahnschrift','Arial Narrow',sans-serif; font-variation-settings:'wght' 700, 'wdth' 85; }
   a{ color:inherit; }
   :focus-visible{ outline:3px solid var(--focus); outline-offset:2px; }
-  .wrap{ max-width:780px; margin:0 auto; padding:28px 20px 60px; }
-  h1.display{ font-size:1.8rem; text-transform:uppercase; margin:0 0 4px; }
-  .subtitulo{ color:var(--ink-soft); font-size:0.85rem; margin-bottom:26px; }
+  .wrap{ max-width:1120px; margin:0 auto; padding:28px 20px 60px; }
+
+  /* header */
+  .painel-header{
+    position:relative; display:flex; justify-content:space-between; align-items:flex-end;
+    border-bottom:4px solid var(--ink); padding:22px 26px 14px; margin-bottom:28px; gap:16px; flex-wrap:wrap;
+  }
+  .painel-header .kicker{ font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.1em; font-size:0.72rem; color:var(--gold); margin-bottom:8px; }
+  h1.display{ font-size:2rem; text-transform:uppercase; margin:0; line-height:1; }
+  .subtitulo{ color:var(--ink-soft); font-size:0.85rem; }
+  .frame{ position:absolute; width:16px; height:16px; border:2px solid var(--gold); opacity:0.6; }
+  .frame.tl{ top:6px; left:6px; border-right:none; border-bottom:none; }
+  .frame.tr{ top:6px; right:6px; border-left:none; border-bottom:none; }
+  .status-radar{
+    display:inline-flex; align-items:center; gap:6px; margin-top:6px;
+    font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.06em; font-size:0.68rem; color:var(--ink-soft);
+  }
+  .status-radar .ponto{ width:7px; height:7px; border-radius:50%; background:var(--savings); box-shadow:0 0 8px var(--savings); animation:pulso-radar 2s ease-in-out infinite; }
+  @keyframes pulso-radar{ 0%,100%{opacity:1;} 50%{opacity:0.35;} }
+  @media (prefers-reduced-motion:reduce){ .status-radar .ponto{ animation:none; } }
 
   .painel-login{
     background:var(--paper-raised); border:1px solid var(--rule); padding:24px 26px; max-width:360px;
@@ -53,11 +72,24 @@
   .oculto{ display:none !important; }
   .erro-login{ color:var(--tag-red); font-size:0.85rem; }
 
-  section.bloco{ margin-bottom:34px; }
-  section.bloco h2{
-    font-family:'Bahnschrift',sans-serif; text-transform:uppercase; letter-spacing:0.06em;
-    font-size:1rem; color:var(--ink-soft); border-bottom:1px dashed var(--rule); padding-bottom:8px; margin-bottom:14px;
+  /* KPI / stat tiles */
+  .stat-row{ display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin-bottom:28px; }
+  .stat-tile{ background:var(--paper-raised); border:1px solid var(--rule); border-top:2px solid var(--gold); padding:16px 18px; }
+  .stat-tile .rotulo{ font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.06em; font-size:0.66rem; color:var(--ink-soft); margin-bottom:8px; }
+  .stat-tile .valor{ font-family:'Bahnschrift',sans-serif; font-weight:700; font-size:2rem; line-height:1; }
+  .stat-tile.status-critical{ border-top-color:var(--tag-red); }
+  .stat-tile.status-warning{ border-top-color:var(--amber); }
+  .stat-tile.status-good{ border-top-color:var(--savings); }
+
+  /* dashboard grid of panels */
+  .dashboard-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:18px; align-items:start; }
+  .painel-card{ background:var(--paper-raised); border:1px solid var(--rule); padding:18px 20px; }
+  .painel-card.full{ grid-column:1 / -1; }
+  .painel-card h2{
+    font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.08em;
+    font-size:0.76rem; color:var(--gold); border-bottom:1px dashed var(--rule); padding-bottom:10px; margin:0 0 14px;
   }
+  .atalhos-lista{ display:flex; flex-wrap:wrap; gap:10px; }
   .atalho-fila{
     display:inline-flex; align-items:center; gap:8px; text-decoration:none;
     border:1.5px solid var(--rule); padding:8px 14px; border-radius:2px; font-size:0.85rem;
@@ -65,23 +97,36 @@
   .atalho-fila:hover{ border-color:var(--gold); color:var(--gold); }
 
   .card-pendente{
-    background:var(--paper-raised); border:1px solid var(--rule); padding:16px; margin-bottom:12px;
-    display:flex; flex-direction:column; gap:8px;
+    background:var(--paper); border:1px solid var(--rule); padding:14px; margin-bottom:10px;
+    display:flex; flex-direction:column; gap:6px; border-left:3px solid var(--rule);
   }
+  .card-pendente.status-warning{ border-left-color:var(--amber); }
+  .card-pendente.status-critical{ border-left-color:var(--tag-red); }
   .card-pendente .eyebrow{
-    font-family:'Bahnschrift',sans-serif; text-transform:uppercase; letter-spacing:0.08em; font-size:0.68rem; color:var(--ink-soft);
+    font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.06em; font-size:0.66rem; color:var(--ink-soft);
   }
   .card-pendente h3{ margin:0; font-size:1rem; }
   .card-pendente p{ margin:0; font-size:0.88rem; color:var(--ink-soft); }
   .card-pendente .link-anuncio{ font-size:0.82rem; word-break:break-all; }
   .card-pendente .acoes{ display:flex; gap:8px; margin-top:6px; }
   .vazio{ color:var(--ink-soft); font-size:0.88rem; font-style:italic; }
+  .lista-scroll{ max-height:360px; overflow-y:auto; padding-right:4px; }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1 class="display">Painel — Radar de Ofertas</h1>
-  <div class="subtitulo">Área restrita ao administrador.</div>
+  <div class="painel-header">
+    <div class="frame tl"></div>
+    <div class="frame tr"></div>
+    <div>
+      <div class="kicker">// área restrita</div>
+      <h1 class="display">Painel — Radar de Ofertas</h1>
+    </div>
+    <div style="text-align:right;">
+      <div class="subtitulo">Só o administrador acessa</div>
+      <div class="status-radar"><span class="ponto"></span>painel ativo</div>
+    </div>
+  </div>
 
   <div class="painel-login" id="bloco-login">
     <label>
@@ -99,64 +144,66 @@
   <div id="bloco-painel" class="oculto">
     <button class="btn-sair" id="botao-sair" style="margin-bottom:24px;">Sair</button>
 
-    <section class="bloco">
-      <h2>Atalhos</h2>
-      <div style="display:flex; flex-wrap:wrap; gap:10px;">
-        <a class="atalho-fila" href="https://github.com/atosdutrafreitas-wq/achados/edit/main/index.html" target="_blank" rel="noopener">Publicar / editar site (GitHub) &rarr;</a>
-        <a class="atalho-fila" href="https://github.com/atosdutrafreitas-wq/achados/tree/main/fila" target="_blank" rel="noopener">Fila de produtos &rarr;</a>
-        <a class="atalho-fila" href="https://console.firebase.google.com/project/radar-de-ofertas-2026/firestore/data" target="_blank" rel="noopener">Dados brutos (Firestore) &rarr;</a>
-        <a class="atalho-fila" href="https://console.firebase.google.com/project/radar-de-ofertas-2026/analytics" target="_blank" rel="noopener">Analisar dados (Analytics) &rarr;</a>
-      </div>
-    </section>
+    <div class="stat-row" id="stat-row">
+      <div class="stat-tile"><div class="rotulo">Parceiros ativos</div><div class="valor" id="stat-parceiros">—</div></div>
+      <div class="stat-tile"><div class="rotulo">Cliques este mês</div><div class="valor" id="stat-cliques-mes">—</div></div>
+      <div class="stat-tile"><div class="rotulo">Pendentes de aprovação</div><div class="valor" id="stat-pendentes">—</div></div>
+      <div class="stat-tile" id="stat-alertas-tile"><div class="rotulo">Alertas</div><div class="valor" id="stat-alertas">—</div></div>
+    </div>
 
-    <section class="bloco">
-      <h2>Parceiros cadastrados</h2>
-      <div id="lista-parceiros"><div class="vazio">Carregando...</div></div>
-    </section>
+    <div class="dashboard-grid">
+      <section class="painel-card full">
+        <h2>Atalhos</h2>
+        <div class="atalhos-lista">
+          <a class="atalho-fila" href="https://github.com/atosdutrafreitas-wq/achados/edit/main/index.html" target="_blank" rel="noopener">Publicar / editar site (GitHub) &rarr;</a>
+          <a class="atalho-fila" href="https://github.com/atosdutrafreitas-wq/achados/tree/main/fila" target="_blank" rel="noopener">Fila de produtos &rarr;</a>
+          <a class="atalho-fila" href="https://console.firebase.google.com/project/radar-de-ofertas-2026/firestore/data" target="_blank" rel="noopener">Dados brutos (Firestore) &rarr;</a>
+          <a class="atalho-fila" href="https://console.firebase.google.com/project/radar-de-ofertas-2026/analytics" target="_blank" rel="noopener">Analisar dados (Analytics) &rarr;</a>
+        </div>
+      </section>
 
-    <section class="bloco">
-      <h2>Anúncios pendentes de aprovação</h2>
-      <div id="lista-pendentes"><div class="vazio">Carregando...</div></div>
-    </section>
+      <section class="painel-card">
+        <h2>Anúncios pendentes de aprovação</h2>
+        <div id="lista-pendentes" class="lista-scroll"><div class="vazio">Carregando...</div></div>
+      </section>
 
-    <section class="bloco">
-      <h2>Lembretes</h2>
-      <div id="lista-lembretes"><div class="vazio">Carregando...</div></div>
-    </section>
+      <section class="painel-card">
+        <h2>Lembretes</h2>
+        <div id="lista-lembretes" class="lista-scroll"><div class="vazio">Carregando...</div></div>
+      </section>
 
-    <section class="bloco">
-      <h2>Cliques por parceiro</h2>
-      <div id="lista-cliques"><div class="vazio">Carregando...</div></div>
-    </section>
+      <section class="painel-card">
+        <h2>Parceiros cadastrados</h2>
+        <div id="lista-parceiros" class="lista-scroll"><div class="vazio">Carregando...</div></div>
+      </section>
 
-    <section class="bloco">
-      <h2>Cliques recentes (quando e onde)</h2>
-      <p class="subtitulo" style="margin-bottom:12px;">Hora exata de cada clique. "Onde" (região de quem clicou) fica no Google Analytics — link na seção de audiência, mais abaixo.</p>
-      <div id="lista-cliques-recentes"><div class="vazio">Carregando...</div></div>
-    </section>
+      <section class="painel-card">
+        <h2>Cliques por parceiro</h2>
+        <div id="lista-cliques" class="lista-scroll"><div class="vazio">Carregando...</div></div>
+      </section>
 
-    <section class="bloco">
-      <h2>Termos mais buscados</h2>
-      <div id="lista-buscas"><div class="vazio">Carregando...</div></div>
-    </section>
+      <section class="painel-card">
+        <h2>Cliques recentes (quando)</h2>
+        <p class="subtitulo" style="margin-bottom:12px;">"Onde" (região) fica no Google Analytics — atalho acima.</p>
+        <div id="lista-cliques-recentes" class="lista-scroll"><div class="vazio">Carregando...</div></div>
+      </section>
 
-    <section class="bloco">
-      <h2>Buscas sem resultado</h2>
-      <p class="subtitulo" style="margin-bottom:12px;">Sinal de demanda que nenhum parceiro/achado atende ainda — decida manualmente se vale correr atrás de alguém.</p>
-      <div id="lista-buscas-vazias"><div class="vazio">Carregando...</div></div>
-    </section>
+      <section class="painel-card">
+        <h2>Termos mais buscados</h2>
+        <div id="lista-buscas" class="lista-scroll"><div class="vazio">Carregando...</div></div>
+      </section>
 
-    <section class="bloco">
-      <h2>Pedidos de upgrade pra plano pago</h2>
-      <div id="lista-upgrades"><div class="vazio">Carregando...</div></div>
-    </section>
+      <section class="painel-card">
+        <h2>Buscas sem resultado</h2>
+        <p class="subtitulo" style="margin-bottom:12px;">Demanda que ninguém atende ainda.</p>
+        <div id="lista-buscas-vazias" class="lista-scroll"><div class="vazio">Carregando...</div></div>
+      </section>
 
-    <section class="bloco">
-      <h2>Perfil de audiência</h2>
-      <a class="atalho-fila" href="https://console.firebase.google.com/project/radar-de-ofertas-2026/analytics" target="_blank" rel="noopener">
-        Abrir Google Analytics (Firebase) &rarr;
-      </a>
-    </section>
+      <section class="painel-card">
+        <h2>Pedidos de upgrade pra plano pago</h2>
+        <div id="lista-upgrades" class="lista-scroll"><div class="vazio">Carregando...</div></div>
+      </section>
+    </div>
   </div>
 </div>
 
@@ -226,6 +273,7 @@
   async function carregarPendentes() {
     listaPendentes.innerHTML = '<div class="vazio">Carregando...</div>';
     const snap = await getDocs(query(collection(db, 'anuncios'), where('status', '==', 'pendente')));
+    document.getElementById('stat-pendentes').textContent = snap.size;
     if (snap.empty) {
       listaPendentes.innerHTML = '<div class="vazio">Nenhum anúncio pendente no momento.</div>';
       return;
@@ -260,6 +308,8 @@
           btn.closest('.acoes').querySelectorAll('button').forEach(b => b.disabled = true);
           await updateDoc(doc(db, 'anuncios', anuncioSnap.id), { status: btn.dataset.acao });
           card.remove();
+          const statPendentes = document.getElementById('stat-pendentes');
+          statPendentes.textContent = Math.max(0, parseInt(statPendentes.textContent, 10) - 1);
           if (!listaPendentes.querySelector('.card-pendente')) {
             listaPendentes.innerHTML = '<div class="vazio">Nenhum anúncio pendente no momento.</div>';
           }
@@ -290,10 +340,11 @@
     const cliques = cliquesSnap.docs.map(d => d.data());
     const agora = Date.now();
 
-    // --- Cliques por parceiro (total, mes atual, mes anterior) ---
+    // --- Cliques por parceiro (total, mes atual vs mes anterior, com comparativo) ---
     const mesAtual = mesAnoAtual(0);
     const mesPassado = mesAnoAtual(1);
     listaCliques.innerHTML = '';
+    let somaCliquesEsteMes = 0;
     if (!parceiros.length) {
       listaCliques.innerHTML = '<div class="vazio">Nenhum parceiro cadastrado ainda.</div>';
     } else {
@@ -309,25 +360,38 @@
         })
         .sort((a, b) => b.total - a.total)
         .forEach(p => {
+          somaCliquesEsteMes += p.esteMs;
+          const delta = p.esteMs - p.mesPassadoQtd;
+          const corDelta = delta > 0 ? 'var(--savings)' : (delta < 0 ? 'var(--tag-red)' : 'var(--ink-soft)');
+          const setaDelta = delta > 0 ? '▲' : (delta < 0 ? '▼' : '·');
           const linha = document.createElement('div');
           linha.className = 'card-pendente';
-          linha.innerHTML = `<h3>${p.nome}</h3><p>${p.total} clique(s) no total · ${p.esteMs} este mês · ${p.mesPassadoQtd} mês passado</p>`;
+          linha.innerHTML = `
+            <h3>${p.nome}</h3>
+            <p><strong style="color:var(--ink); font-size:1.1rem;">${p.esteMs}</strong> este mês
+              <span style="color:${corDelta};">${setaDelta} ${Math.abs(delta)} vs mês passado (${p.mesPassadoQtd})</span>
+              · ${p.total} no total</p>
+          `;
           listaCliques.appendChild(linha);
         });
     }
+    document.getElementById('stat-cliques-mes').textContent = somaCliquesEsteMes;
+    document.getElementById('stat-parceiros').textContent = parceiros.length;
 
     // --- Parceiros cadastrados (visao geral / configuracao) ---
     listaParceiros.innerHTML = parceiros.length
       ? parceiros.map(p => {
           let trialTxt = '—';
+          let nivel = '';
           if (p.plano === 'gratis' && p.trialExpiraEm) {
             const expira = p.trialExpiraEm.toDate ? p.trialExpiraEm.toDate() : new Date(p.trialExpiraEm);
             const dias = Math.round((expira.getTime() - agora) / 86400000);
-            trialTxt = dias < 0 ? `trial expirado há ${Math.abs(dias)}d` : `trial expira em ${dias}d`;
+            if (dias < 0) { trialTxt = `trial expirado há ${Math.abs(dias)}d`; nivel = 'status-critical'; }
+            else { trialTxt = `trial expira em ${dias}d`; if (dias <= 14) nivel = 'status-warning'; }
           } else if (p.plano === 'pago') {
             trialTxt = 'plano pago';
           }
-          return `<div class="card-pendente"><h3>${p.nome}</h3><p>${p.tipo} · ${p.contato} · ${trialTxt}</p></div>`;
+          return `<div class="card-pendente ${nivel}"><h3>${p.nome}</h3><p>${p.tipo} · ${p.contato} · ${trialTxt}</p></div>`;
         }).join('')
       : '<div class="vazio">Nenhum parceiro cadastrado ainda.</div>';
 
@@ -345,7 +409,7 @@
       ? recentes.map(c => `<div class="card-pendente">${formatExato(c.ts)} — ${porParceiroId[c.parceiroId] || c.parceiroId}</div>`).join('')
       : '<div class="vazio">Nenhum clique registrado ainda.</div>';
 
-    // --- Lembretes ---
+    // --- Lembretes (com nivel de severidade: critical > warning) ---
     const lembretes = [];
 
     parceiros.forEach(p => {
@@ -353,9 +417,12 @@
         const expira = p.trialExpiraEm.toDate ? p.trialExpiraEm.toDate() : new Date(p.trialExpiraEm);
         const diasRestantes = Math.round((expira.getTime() - agora) / 86400000);
         if (diasRestantes <= 14) {
-          lembretes.push(diasRestantes < 0
-            ? `${p.nome} — trial grátis já expirou há ${Math.abs(diasRestantes)} dia(s).`
-            : `${p.nome} — trial grátis expira em ${diasRestantes} dia(s).`);
+          lembretes.push({
+            nivel: diasRestantes < 0 ? 'status-critical' : 'status-warning',
+            texto: diasRestantes < 0
+              ? `${p.nome} — trial grátis já expirou há ${Math.abs(diasRestantes)} dia(s).`
+              : `${p.nome} — trial grátis expira em ${diasRestantes} dia(s).`
+          });
         }
       }
       const anunciosDoParceiro = anuncios.filter(a => a.parceiroId === p.id);
@@ -365,7 +432,7 @@
       }, 0);
       const diasSemAnuncio = maisRecente ? Math.round((agora - maisRecente) / 86400000) : null;
       if (diasSemAnuncio !== null && diasSemAnuncio > 7) {
-        lembretes.push(`Chamar ${p.nome} — não manda anúncio novo há ${diasSemAnuncio} dia(s).`);
+        lembretes.push({ nivel: 'status-warning', texto: `Chamar ${p.nome} — não manda anúncio novo há ${diasSemAnuncio} dia(s).` });
       }
     });
 
@@ -375,13 +442,22 @@
       const primeiraData = texto.match(/(\d{4}-\d{2}-\d{2})/);
       if (primeiraData) {
         const dias = Math.round((agora - new Date(primeiraData[1]).getTime()) / 86400000);
-        if (dias >= 3) lembretes.push(`Você não publica um achado orgânico novo há ${dias} dia(s).`);
+        if (dias >= 3) lembretes.push({ nivel: 'status-warning', texto: `Você não publica um achado orgânico novo há ${dias} dia(s).` });
       }
     } catch (e) { /* historico.md indisponivel — nao bloqueia o resto do painel */ }
 
     listaLembretes.innerHTML = lembretes.length
-      ? lembretes.map(l => `<div class="card-pendente">${l}</div>`).join('')
+      ? lembretes.map(l => `<div class="card-pendente ${l.nivel}">${l.texto}</div>`).join('')
       : '<div class="vazio">Nenhum lembrete no momento.</div>';
+
+    const statAlertas = document.getElementById('stat-alertas');
+    const statAlertasTile = document.getElementById('stat-alertas-tile');
+    statAlertas.textContent = lembretes.length;
+    statAlertasTile.classList.remove('status-critical', 'status-warning', 'status-good');
+    statAlertasTile.classList.add(
+      lembretes.some(l => l.nivel === 'status-critical') ? 'status-critical'
+        : lembretes.length ? 'status-warning' : 'status-good'
+    );
   }
 
   async function carregarBuscas() {
