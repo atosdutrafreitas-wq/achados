@@ -1,5 +1,7 @@
 # Histórico
 
+- 2026-07-21: fila `fila/` vazia, nenhum item novo pendente. Nenhum card no `index.html` com `data-expira` vencido nesta execução.
+
 - 2026-07-20: fila `fila/` vazia, nenhum item novo pendente. Nenhum card no `index.html` com `data-expira` vencido nesta execução.
 
 - 2026-07-16: fila `fila/` vazia (nenhum item novo pendente). Removido o card expirado "Mercado Livre — /p/MLB64186498" (categoria casa, `data-expira="2026-07-15T15:53:18.840Z"`, vencido antes desta execução).
