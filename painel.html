@@ -178,8 +178,8 @@
         <h2>Atalhos</h2>
         <div class="atalhos-lista">
           <a class="atalho-fila" href="index.html" style="border-color:var(--gold); color:var(--gold);">Ver o site &rarr;</a>
-          <a class="atalho-fila" href="https://github.com/atosdutrafreitas-wq/achados/edit/main/index.html" target="_blank" rel="noopener">Publicar / editar site (GitHub) &rarr;</a>
-          <a class="atalho-fila" href="https://github.com/atosdutrafreitas-wq/achados/tree/main/fila" target="_blank" rel="noopener">Fila de produtos &rarr;</a>
+          <a class="atalho-fila" href="https://github.com/atosdutrafreitas-wq/radar-de-ofertas/edit/main/index.html" target="_blank" rel="noopener">Publicar / editar site (GitHub) &rarr;</a>
+          <a class="atalho-fila" href="https://github.com/atosdutrafreitas-wq/radar-de-ofertas/tree/main/fila" target="_blank" rel="noopener">Fila de produtos &rarr;</a>
           <a class="atalho-fila" href="https://console.firebase.google.com/project/radar-de-ofertas-2026/firestore/data" target="_blank" rel="noopener">Dados brutos (Firestore) &rarr;</a>
           <a class="atalho-fila" href="https://console.firebase.google.com/project/radar-de-ofertas-2026/analytics" target="_blank" rel="noopener">Analisar dados (Analytics) &rarr;</a>
         </div>
@@ -535,7 +535,7 @@
     });
 
     try {
-      const resp = await fetch('https://raw.githubusercontent.com/atosdutrafreitas-wq/achados/main/historico.md');
+      const resp = await fetch('https://raw.githubusercontent.com/atosdutrafreitas-wq/radar-de-ofertas/main/historico.md');
       const texto = await resp.text();
       const primeiraData = texto.match(/(\d{4}-\d{2}-\d{2})/);
       if (primeiraData) {
@@ -545,7 +545,7 @@
     } catch (e) { /* historico.md indisponivel — nao bloqueia o resto do painel */ }
 
     try {
-      const resp = await fetch('https://api.github.com/repos/atosdutrafreitas-wq/achados/contents/fila');
+      const resp = await fetch('https://api.github.com/repos/atosdutrafreitas-wq/radar-de-ofertas/contents/fila');
       const itens = await resp.json();
       const pendentesNaFila = Array.isArray(itens) ? itens.filter(i => i.type === 'file') : [];
       if (pendentesNaFila.length) {
