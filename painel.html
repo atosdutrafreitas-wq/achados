@@ -85,10 +85,19 @@
   .dashboard-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:18px; align-items:start; }
   .painel-card{ background:var(--paper-raised); border:1px solid var(--rule); padding:18px 20px; }
   .painel-card.full{ grid-column:1 / -1; }
+  .card-header{
+    display:flex; align-items:baseline; justify-content:space-between; gap:10px;
+    border-bottom:1px dashed var(--rule); padding-bottom:10px; margin:0 0 14px;
+  }
   .painel-card h2{
     font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.08em;
-    font-size:0.76rem; color:var(--gold); border-bottom:1px dashed var(--rule); padding-bottom:10px; margin:0 0 14px;
+    font-size:0.76rem; color:var(--gold); margin:0;
   }
+  .ver-firestore{
+    font-family:var(--font-mono); font-size:0.68rem; color:var(--ink-soft);
+    text-decoration:none; white-space:nowrap; border-bottom:1px dashed transparent;
+  }
+  .ver-firestore:hover{ color:var(--gold); border-bottom-color:var(--gold); }
   .atalhos-lista{ display:flex; flex-wrap:wrap; gap:10px; }
   .atalho-fila{
     display:inline-flex; align-items:center; gap:8px; text-decoration:none;
@@ -187,45 +196,78 @@
       </section>
 
       <section class="painel-card">
-        <h2>Anúncios pendentes de aprovação</h2>
+        <div class="card-header">
+          <h2>Anúncios pendentes de aprovação</h2>
+          <a class="ver-firestore" href="https://console.firebase.google.com/project/radar-de-ofertas-2026/firestore/data/~2Fanuncios" target="_blank" rel="noopener">Ver dados &rarr;</a>
+        </div>
         <div id="lista-pendentes" class="lista-scroll"><div class="vazio">Carregando...</div></div>
       </section>
 
       <section class="painel-card">
-        <h2>Lembretes</h2>
+        <div class="card-header">
+          <h2>Lembretes</h2>
+          <a class="ver-firestore" href="https://console.firebase.google.com/project/radar-de-ofertas-2026/firestore/data/~2Fparceiros" target="_blank" rel="noopener">Ver dados &rarr;</a>
+        </div>
         <div id="lista-lembretes" class="lista-scroll"><div class="vazio">Carregando...</div></div>
       </section>
 
       <section class="painel-card">
-        <h2>Parceiros cadastrados</h2>
+        <div class="card-header">
+          <h2>Parceiros cadastrados</h2>
+          <a class="ver-firestore" href="https://console.firebase.google.com/project/radar-de-ofertas-2026/firestore/data/~2Fparceiros" target="_blank" rel="noopener">Ver dados &rarr;</a>
+        </div>
         <div id="lista-parceiros" class="lista-scroll"><div class="vazio">Carregando...</div></div>
       </section>
 
       <section class="painel-card">
-        <h2>Cliques por parceiro</h2>
+        <div class="card-header">
+          <h2>Cliques por parceiro</h2>
+          <a class="ver-firestore" href="https://console.firebase.google.com/project/radar-de-ofertas-2026/firestore/data/~2Fcliques" target="_blank" rel="noopener">Ver dados &rarr;</a>
+        </div>
         <div id="lista-cliques" class="lista-scroll"><div class="vazio">Carregando...</div></div>
       </section>
 
       <section class="painel-card">
-        <h2>Cliques recentes (quando)</h2>
+        <div class="card-header">
+          <h2>Cliques recentes (quando)</h2>
+          <a class="ver-firestore" href="https://console.firebase.google.com/project/radar-de-ofertas-2026/firestore/data/~2Fcliques" target="_blank" rel="noopener">Ver dados &rarr;</a>
+        </div>
         <p class="subtitulo" style="margin-bottom:12px;">"Onde" (região) fica no Google Analytics — atalho acima.</p>
         <div id="lista-cliques-recentes" class="lista-scroll"><div class="vazio">Carregando...</div></div>
       </section>
 
       <section class="painel-card">
-        <h2>Termos mais buscados</h2>
+        <div class="card-header">
+          <h2>Termos mais buscados</h2>
+          <a class="ver-firestore" href="https://console.firebase.google.com/project/radar-de-ofertas-2026/firestore/data/~2Fbuscas" target="_blank" rel="noopener">Ver dados &rarr;</a>
+        </div>
         <div id="lista-buscas" class="lista-scroll"><div class="vazio">Carregando...</div></div>
       </section>
 
       <section class="painel-card">
-        <h2>Buscas sem resultado</h2>
+        <div class="card-header">
+          <h2>Buscas sem resultado</h2>
+          <a class="ver-firestore" href="https://console.firebase.google.com/project/radar-de-ofertas-2026/firestore/data/~2Fbuscas" target="_blank" rel="noopener">Ver dados &rarr;</a>
+        </div>
         <p class="subtitulo" style="margin-bottom:12px;">Demanda que ninguém atende ainda.</p>
         <div id="lista-buscas-vazias" class="lista-scroll"><div class="vazio">Carregando...</div></div>
       </section>
 
       <section class="painel-card">
-        <h2>Pedidos de upgrade pra plano pago</h2>
+        <div class="card-header">
+          <h2>Pedidos de upgrade pra plano pago</h2>
+          <a class="ver-firestore" href="https://console.firebase.google.com/project/radar-de-ofertas-2026/firestore/data/~2FpedidosUpgrade" target="_blank" rel="noopener">Ver dados &rarr;</a>
+        </div>
         <div id="lista-upgrades" class="lista-scroll"><div class="vazio">Carregando...</div></div>
+      </section>
+
+      <section class="painel-card">
+        <div class="card-header">
+          <h2>Capturas de visitantes</h2>
+          <a class="ver-firestore" href="https://console.firebase.google.com/project/radar-de-ofertas-2026/firestore/data/~2Fcaptura_visitantes" target="_blank" rel="noopener">Ver dados &rarr;</a>
+        </div>
+        <p class="subtitulo" style="margin-bottom:12px;">Quem deixou e-mail/WhatsApp no banner "Não perca nenhum achado" da home.</p>
+        <div id="lista-capturas" class="lista-scroll"><div class="vazio">Carregando...</div></div>
       </section>
     </div>
   </div>
@@ -396,6 +438,7 @@
   const listaBuscas = document.getElementById('lista-buscas');
   const listaBuscasVazias = document.getElementById('lista-buscas-vazias');
   const listaUpgrades = document.getElementById('lista-upgrades');
+  const listaCapturas = document.getElementById('lista-capturas');
 
   document.getElementById('botao-login').addEventListener('click', async () => {
     const email = document.getElementById('login-email').value.trim();
@@ -436,8 +479,28 @@
   }
 
   async function carregarCapturas() {
+    listaCapturas.innerHTML = '<div class="vazio">Carregando...</div>';
     const snap = await getDocs(collection(db, 'captura_visitantes'));
     document.getElementById('stat-capturas').textContent = snap.size;
+
+    if (snap.empty) {
+      listaCapturas.innerHTML = '<div class="vazio">Nenhuma captura ainda.</div>';
+      return;
+    }
+    const capturas = snap.docs
+      .map(s => s.data())
+      .sort((a, b) => {
+        const ta = a.criado_em && a.criado_em.toMillis ? a.criado_em.toMillis() : 0;
+        const tb = b.criado_em && b.criado_em.toMillis ? b.criado_em.toMillis() : 0;
+        return tb - ta;
+      });
+    listaCapturas.innerHTML = '';
+    capturas.forEach(d => {
+      const linha = document.createElement('div');
+      linha.className = 'card-pendente';
+      linha.innerHTML = `<h3>${d.nome || '(sem nome)'}</h3><p>Contato: ${d.contato} · ${formatRelativo(d.criado_em)}</p>`;
+      listaCapturas.appendChild(linha);
+    });
   }
 
   async function carregarPendentes() {
